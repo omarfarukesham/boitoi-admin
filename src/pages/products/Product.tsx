@@ -1,5 +1,5 @@
 import ProductTable from "@/components/table/table";
-import { useDeleteProductMutation, useGetProductsQuery } from "@/feature/product/apiSlice";
+import { useDeleteProductMutation, useGetProductsQuery } from "@/feature/product/productSlice";
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';

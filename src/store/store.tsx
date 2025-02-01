@@ -1,10 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit'
 import toggleSlice from '../feature/toggle/toggleSlice'
-import { apiSlice } from '@/feature/product/apiSlice'
+import { apiSlice } from '@/feature/product/productSlice'
+// import { authApi } from '@/feature/auth/authSlice'
+
 export const store = configureStore({
   reducer: {
     toggle: toggleSlice,
-    [apiSlice.reducerPath]: apiSlice.reducer
+    [apiSlice.reducerPath]: apiSlice.reducer,
+    // [authApi.reducerPath]: authApi.reducer
+    
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSlice.middleware),

@@ -1,4 +1,4 @@
-import { useAddProductMutation } from "@/feature/product/apiSlice";
+import { useAddProductMutation } from "@/feature/product/productSlice";
 import { TProduct } from "@/type/product.type";
 import { ArrowLeft } from "lucide-react";
 import { useForm, SubmitHandler } from "react-hook-form";

@@ -1,5 +1,6 @@
 import App from "@/App";
 import { About, Home, Order, Product, Users } from "@/pages";
+import Login from "@/pages/Login";
 import ProductAdd from "@/pages/products/Product.add";
 import ProductEdit from "@/pages/products/Product.edit";
 import { createBrowserRouter } from 'react-router-dom';
@@ -44,6 +45,11 @@ const routes = createBrowserRouter([
       }
     ]
   },
+  {
+    path: '/login',
+    element: <Login />  
+
+  }
 ])
 
 
