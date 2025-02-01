@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-const API_BASE_URL = process.env.API_BASE_URL;
+const API_BASE_URL = 'https://assignment-3-gray-seven.vercel.app/api/';
 
 export const authApi = createApi({
   reducerPath: 'authApi',
@@ -14,7 +14,7 @@ export const authApi = createApi({
       return headers;
     },
   }),
-  
+
   endpoints: (builder) => ({
     loginUser: builder.mutation({
       query: (credentials) => ({
@@ -22,14 +22,14 @@ export const authApi = createApi({
         method: 'POST',
         body: credentials,
       }),
-      async onQueryStarted(_, { queryFulfilled }) {
-        try {
-          const { data } = await queryFulfilled;
-          localStorage.setItem('token', data.token);
-        } catch (error) {
-          console.error('Login failed:', error);
-        }
-      },
+    //   async onQueryStarted(_, { queryFulfilled }) {
+    //     try {
+    //       const { data } = await queryFulfilled;
+    //       localStorage.setItem('token', data.token);
+    //     } catch (error) {
+    //       console.error('Login failed:', error);
+    //     }
+    //   },
     }),
 
     logoutUser: builder.mutation({

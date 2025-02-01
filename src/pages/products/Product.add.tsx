@@ -80,7 +80,7 @@ export default function ProductAdd() {
         image: uploadedImageUrl
       };
   
-      console.log("Product Data:", productData);
+      // console.log("Product Data:", productData);
       await addProduct(productData).unwrap();
       navigate("/product");
     } catch (error) {

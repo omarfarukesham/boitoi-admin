@@ -21,9 +21,9 @@ export default function ProductEdit() {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [uploading, setUploading] = useState<boolean>(false);
 
-  if (product) {
-    console.log(product.data);
-  }
+  // if (product) {
+  //   console.log(product.data);
+  // }
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm<Omit<TProduct, "image">>();
 

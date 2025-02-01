@@ -7,6 +7,7 @@ import { HomeIcon, OrderIcon, ProductIcon, UserIcon } from "@/assets/icons2";
 
 const Navbar = () => {
   const isSidebarOpen = useSelector((state: RootState) => state.toggle.value);
+  const role = localStorage.getItem('role');
 
   return (
     <div className="flex h-screen">
@@ -22,25 +23,36 @@ const Navbar = () => {
 
           {/* Navigation Links */}
           <div className="py-5">
-            <Link to="/home" className="flex items-center space-x-2 p-3 hover:bg-secondary rounded-md">
-             <HomeIcon />
-              {isSidebarOpen && <span className="text-base-1 px-1">Home</span>}
-            </Link>
+            {role === "admin" && (
+              <div>
+                <Link to="/home" className="flex items-center space-x-2 p-3 hover:bg-secondary rounded-md">
+                  <HomeIcon />
+                  {isSidebarOpen && <span className="text-base-1 px-1">Home</span>}
+                </Link>
 
-            <Link to="/product" className="flex items-center space-x-2 p-3 hover:bg-secondary rounded-md">
-              <ProductIcon />
-              {isSidebarOpen && <span className="text-base-1 px-1">Products</span>}
-            </Link>
+                <Link to="/product" className="flex items-center space-x-2 p-3 hover:bg-secondary rounded-md">
+                  <ProductIcon />
+                  {isSidebarOpen && <span className="text-base-1 px-1">Products</span>}
+                </Link>
 
-            <Link to="/order" className="flex items-center space-x-2 p-3 hover:bg-secondary rounded-md">
-              <OrderIcon className="w-6 h-6 text-white" />
-              {isSidebarOpen && <span className="text-base-1 px-1">Orders</span>}
-            </Link>
-
-            <Link to="/user" className="flex items-center space-x-2 p-3 hover:bg-secondary rounded-md">
-              <UserIcon className="w-6 h-6 text-white" />
-              {isSidebarOpen && <span className="text-base-1 px-1">Users</span>}
-            </Link>
+                <Link to="/order" className="flex items-center space-x-2 p-3 hover:bg-secondary rounded-md">
+                  <OrderIcon className="w-6 h-6 text-white" />
+                  {isSidebarOpen && <span className="text-base-1 px-1">Orders</span>}
+                </Link>
+                <Link to="/user" className="flex items-center space-x-2 p-3 hover:bg-secondary rounded-md">
+                  <UserIcon className="w-6 h-6 text-white" />
+                  {isSidebarOpen && <span className="text-base-1 px-1">Users</span>}
+                </Link>
+              </div>
+            )}
+            {role === "user" && (
+              <div>
+                <Link to="/order" className="flex items-center space-x-2 p-3 hover:bg-secondary rounded-md">
+                  <OrderIcon className="w-6 h-6 text-white" />
+                  {isSidebarOpen && <span className="text-base-1 px-1">Orders</span>}
+                </Link>
+              </div>
+            )}
             {/* <Link to="/product/add-product" className="flex items-center space-x-2 p-3 hover:bg-secondary rounded-md">
               <UserIcon className="w-6 h-6 text-white" />
               {isSidebarOpen && <span className="text-base-1 px-1">Add Product</span>}
