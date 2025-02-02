@@ -29,16 +29,20 @@ export default function App() {
         <Outlet />
       ) : (
         <div className="h-screen flex overflow-hidden">
-          <Navbar />
-          <div className="flex-1 flex flex-col w-full md:w-[calc(100%-250px)]">
-            <div className="sticky top-0 z-50">
-              <Topbar />
+        <Navbar />
+        <div className="flex-1 flex flex-col w-full md:w-[calc(100%-250px)]">
+          <div className="sticky top-0 z-50">
+            <Topbar />
+          </div>
+          <div className="flex-1 overflow-y-auto bg-gray-1">
+            <div className="p-4">
+              <Suspense fallback={<LoadingSpinner text="Loading your content" className={undefined} />}>
+                <Outlet />
+              </Suspense>
             </div>
-            <Suspense fallback={<LoadingSpinner />}>
-              <Outlet />
-            </Suspense>
           </div>
         </div>
+      </div>
       )}
     </>
   );
