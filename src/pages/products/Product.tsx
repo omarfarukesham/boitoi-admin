@@ -12,10 +12,20 @@ export default function Product() {
   const [productToDelete, setProductToDelete] = useState<string | null>(null);
   const [deleteProduct] = useDeleteProductMutation();
 
+  // Add pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {JSON.stringify(error)}</p>;
 
   const products = data?.data || [];
+
+  // Calculate pagination
+  const indexOfLastProduct = currentPage * itemsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - itemsPerPage;
+  const currentProducts = products?.slice(indexOfFirstProduct, indexOfLastProduct);
+  const totalPages = Math.ceil((products?.length || 0) / itemsPerPage);
 
   // Placeholder functions for actions
   const handleEdit = (id: string) => {
@@ -46,6 +56,34 @@ export default function Product() {
        navigate('/product/add-product');
   };
 
+  // Add pagination component
+  const Pagination = () => {
+    return (
+      <div className="flex justify-center items-center gap-2 mt-4">
+      <button
+        onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+        disabled={currentPage === 1}
+        className="px-3 py-1 text-sm rounded-md bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed transition"
+      >
+        ← Prev
+      </button>
+    
+      <span className="text-sm font-medium">
+        Page {currentPage} of {totalPages}
+      </span>
+    
+      <button
+        onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+        disabled={currentPage === totalPages}
+        className="px-3 py-1 text-sm rounded-md bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed transition"
+      >
+        Next →
+      </button>
+    </div>
+    
+    );
+  };
+
   return (
     <>
       <div className="p-5 w-full md:w-auto">
@@ -56,10 +94,11 @@ export default function Product() {
           </button>
         </div>
         <ProductTable
-          products={products}
+          products={currentProducts} // Pass paginated products
           onEdit={handleEdit}
           onDelete={handleDelete}
         />
+        <Pagination />
       </div>
 
       {/* Delete Confirmation Modal */}

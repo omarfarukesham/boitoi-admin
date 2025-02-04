@@ -42,6 +42,10 @@ export const authApi = createApi({
     getCurrentUser: builder.query({
       query: () => 'auth/me',
     }),
+
+    getAllUsers: builder.query({
+      query: () => 'user',
+    }),
   }),
 });
 
@@ -49,4 +53,5 @@ export const {
   useLoginUserMutation,
   useLogoutUserMutation,
   useGetCurrentUserQuery,
+  useGetAllUsersQuery
 } = authApi;
