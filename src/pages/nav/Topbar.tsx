@@ -3,7 +3,7 @@ import { RootState } from "@/store/store";
 import { toggle } from "@/feature/toggle/toggleSlice";
 import avatar from "../../assets/images/avatar.png";
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 
 const Topbar = () => {
@@ -52,6 +52,7 @@ const Topbar = () => {
       </button>
 
       <div className="flex items-center gap-5">
+        <Link to="https://boitoi-marketplace.vercel.app/" className='text-sm bg-primary text-white hover:bg-secondary hover:text-primary p-2 rounded-lg'>Go Marketplace</Link>
         <p>{role?.toLocaleUpperCase()}</p>
         <button className="p-1 bg-gray-3 rounded-full"  onClick={() => setShowLogoutModal(true)}>
           <img src={avatar} alt="User Avatar" className="w-6 h-6 rounded-full" />
