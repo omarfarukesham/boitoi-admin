@@ -11,6 +11,10 @@ interface IProduct {
   image?: string;
 }
 
+interface IProductResponse {
+  data: IProduct;
+}
+
 export const apiSlice = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({
@@ -24,7 +28,7 @@ export const apiSlice = createApi({
   tagTypes: ['Products'],
   endpoints: (builder) => ({
     // GET all products
-    getProducts: builder.query<IProduct[], void>({
+    getProducts: builder.query<IProductResponse[], void>({
       query: () => 'products',
       providesTags: ['Products'],
     }),

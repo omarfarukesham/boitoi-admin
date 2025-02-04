@@ -22,7 +22,7 @@ const Button: React.FC<ButtonProps> = ({
   ...rest
 }) => {
   // If the variant is 'table-action', override the size
-  if (variant === "table-action") size = "";
+  if (variant === "table-action") size = "small";
 
   return (
     <button

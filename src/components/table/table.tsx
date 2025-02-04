@@ -1,5 +1,5 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import Button from "@/components/ui/Button";
+// import Button from "@/components/ui/Button";
 import { TProduct } from "@/type/product.type";
 import EditIcon from "@/assets/icons/EditIcon";
 import DeleteIcon from "@/assets/icons/DeleteIcon";
@@ -48,13 +48,13 @@ export default function ProductTable({ products, onEdit, onDelete }: ProductTabl
             <TableCell>{product.price}</TableCell>
             <TableCell>{product.quantity}</TableCell>
             <TableCell className="flex gap-2 justify-center">
-              <Button size="small" onClick={() => product._id && onEdit(product._id.toString())} className="text-sm text-white">
+              <button onClick={() => product._id && onEdit(product._id.toString())} className="text-sm text-white bg-primary hover:bg-secondary p-1 rounded-lg">
                   <EditIcon />
-              </Button>
+              </button>
              
-              <Button size="small"  onClick={() => product._id && onDelete(product._id.toString())} className="text-sm text-white bg-danger">
+              <button  onClick={() => product._id && onDelete(product._id.toString())} className="text-sm text-white bg-danger p-1 rounded-lg hover:bg-primary">
                 <DeleteIcon />
-              </Button>
+              </button>
             </TableCell>
           </TableRow>
         ))}

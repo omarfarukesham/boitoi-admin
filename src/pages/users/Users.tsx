@@ -2,6 +2,15 @@ import { useGetAllUsersQuery } from '@/feature/auth/authSlice';
 import { format } from 'date-fns';
 import { FaUserLock, FaUserCheck } from 'react-icons/fa';
 
+interface User {
+  _id: string;
+  name: string;
+  email: string;
+  role: string;
+  isBlocked: boolean;
+  createdAt: string;
+}
+
 export default function Users() {
   const { data: users, isLoading, error } = useGetAllUsersQuery(undefined);
 
@@ -44,37 +53,37 @@ export default function Users() {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {users?.data?.map((user) => (
+            {users?.data?.map((user: User) => (
               <tr key={user._id} className="hover:bg-gray-50">
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm font-medium text-gray-900">
-                    {user.name}
-                  </div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-gray-500">{user.email}</div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
-                    ${user.role === 'admin' ? 'bg-purple-100 text-purple-800' : 'bg-green-100 text-green-800'}`}>
-                    {user.role}
-                  </span>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="flex items-center">
-                    {user.isBlocked ? (
-                      <FaUserLock className="text-red-500 mr-2" />
-                    ) : (
-                      <FaUserCheck className="text-green-500 mr-2" />
-                    )}
-                    <span className={`text-sm ${user.isBlocked ? 'text-red-500' : 'text-green-500'}`}>
-                      {user.isBlocked ? 'Blocked' : 'Active'}
-                    </span>
-                  </div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {format(new Date(user.createdAt), 'MMM dd, yyyy')}
-                </td>
+              <td className="px-6 py-4 whitespace-nowrap">
+                <div className="text-sm font-medium text-gray-900">
+                {user.name}
+                </div>
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap">
+                <div className="text-sm text-gray-500">{user.email}</div>
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap">
+                <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
+                ${user.role === 'admin' ? 'bg-purple-100 text-purple-800' : 'bg-green-100 text-green-800'}`}>
+                {user.role}
+                </span>
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap">
+                <div className="flex items-center">
+                {user.isBlocked ? (
+                  <FaUserLock className="text-red-500 mr-2" />
+                ) : (
+                  <FaUserCheck className="text-green-500 mr-2" />
+                )}
+                <span className={`text-sm ${user.isBlocked ? 'text-red-500' : 'text-green-500'}`}>
+                  {user.isBlocked ? 'Blocked' : 'Active'}
+                </span>
+                </div>
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                {format(new Date(user.createdAt), 'MMM dd, yyyy')}
+              </td>
               </tr>
             ))}
           </tbody>

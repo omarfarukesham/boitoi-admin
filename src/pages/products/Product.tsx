@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import ProductTable from "@/components/table/table";
 import { useDeleteProductMutation, useGetProductsQuery } from "@/feature/product/productSlice";
 import { useNavigate } from 'react-router-dom';
@@ -19,7 +20,7 @@ export default function Product() {
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {JSON.stringify(error)}</p>;
 
-  const products = data?.data || [];
+  const products = (data as any)?.data || [];
 
   // Calculate pagination
   const indexOfLastProduct = currentPage * itemsPerPage;

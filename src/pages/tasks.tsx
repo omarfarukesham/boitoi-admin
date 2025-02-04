@@ -1,9 +1,6 @@
-import { Button } from "@/components/ui/button"
 
-function Tasks() {
+export default function tasks() {
   return (
-    <div className=" flex justify-center items-center w-full h-screen"> <Button>My Task</Button></div>
+    <div>tasks</div>
   )
 }
-
-export default Tasks

@@ -1,9 +1,11 @@
-import { useGetProductQuery, useUpdateProductMutation } from "@/feature/product/productSlice";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+// import { useGetProductQuery, useUpdateProductMutation } from "@/feature/product/productSlice";
 import { TProduct } from "@/type/product.type";
 import { ArrowLeft } from "lucide-react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useGetProductQuery, useUpdateProductMutation } from "@/feature/product/productSlice";
 
 const CLOUDINARY_UPLOAD_PRESET = "ecom_preset";
 const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/dbtskylxt/image/upload";
@@ -27,8 +29,12 @@ export default function ProductEdit() {
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm<Omit<TProduct, "image">>();
 
+  const isProductResponse = (data: any): data is { data: TProduct } => {
+    return data && data.data && typeof data.data.title === 'string'; // Adjust checks as needed
+  };
+  
   useEffect(() => {
-    if (product) {  
+    if (product && isProductResponse(product)) {
       reset({
         title: product.data.title,
         author: product.data.author,
@@ -41,7 +47,7 @@ export default function ProductEdit() {
       setImageUrl(product.data.image || null);
     }
   }, [product, reset]);
-
+  
   const uploadImage = async () => {
     if (!image) return product?.image || null;
     
